@@ -1,5 +1,4 @@
-
-import React from 'react';
+import React, {createContext} from 'react';
 
 export const TodoContext = createContext();
 
@@ -8,11 +7,14 @@ class TodoContextProvider extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            todos:[],
+            todos: [
+                {name: 'do something'},
+   
+            ],
         };
     }
     //create
-        createTodo() {
+    createTodo() {
 
         }
     // read
