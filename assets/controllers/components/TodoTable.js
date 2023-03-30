@@ -12,6 +12,8 @@ function TodoTable () {
 
     const context = useContext(TodoContext);
     const [addTodo, setAddTodo] = useState('');
+    const [editIsShown, setIsSchown] = useState(false);
+    const [aditTodo, setEditTodo] = useState('');
 
     return (
         <form onSubmit={(event) => {
@@ -34,11 +36,21 @@ function TodoTable () {
                             <IconButton type="submit"><QueueIcon/></IconButton>
                         </TableCell>
                     </TableRow>
-                    {context.todos.slice().reverse().map((todo, index) => (
-                        <TableRow key={'todo ' + index}>
-                            <TableCell>{todo.name}</TableCell>
-                            <TableCell align="right">
-                                <IconButton><BorderColorIcon/></IconButton>
+                        {context.todos.slice().reverse().map((todo, index) => (
+                    <TableRow key={'todo ' + index}>
+                        <TableCell>
+                             {editIsShown ? 
+                                <TextField value={editTodo} onChange={(event) => {
+                                    setEditTodo(event.target.value);
+                                }}/>
+
+                                        :
+                        
+                            todo.name}
+                            
+                        </TableCell>
+                    <TableCell align="right">
+                                <IconButton onClick={() => {setIsSchown(true); setEditTodo(todo.name)}}><BorderColorIcon/></IconButton>
                                 <IconButton><AutoDeleteIcon/></IconButton>
                             </TableCell>
                         </TableRow>
