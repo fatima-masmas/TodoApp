@@ -1,7 +1,6 @@
 import { Dialog, DialogActions, DialogContent, DialogTitle, Button } from '@mui/material';
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import { Context } from '@hotwired/stimulus';
 import { TodoContext } from '../contexts/TodoContext';
 
 
@@ -32,7 +31,7 @@ function DeleteDialog(props) {
     DeleteDialog.propTypes = {
         open: PropTypes.bool.isRequired,
         setDeleteConfirmationIsShown: PropTypes.func.isRequired,
-        todo: PropTypes.object 
+        todo: PropTypes.object
     };
 
     export default DeleteDialog;
