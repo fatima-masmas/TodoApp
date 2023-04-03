@@ -57,8 +57,7 @@ class TodoContextProvider extends React.Component {
         this.setState({
             todos: todos,
         })
-    todos = todos.filter(todo => todo.id !== id);
-    this.setState({ todos: todos });
+    
     }
 
     
