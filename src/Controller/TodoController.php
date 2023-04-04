@@ -24,7 +24,7 @@ class TodoController extends AbstractController
         $this->todoRepository = $todoRepository;
     }
      
-    #[Route('/read', name: 'api_todo_read')]
+    #[Route('/read', name: 'api_todo_read', methods: 'GET' )]
     
  
     public function index(): Response
@@ -40,7 +40,8 @@ class TodoController extends AbstractController
     }
 
     // /api/todo/create
-    #[Route('api/todo/create', name: 'api_todo_create')]
+    #[Route('/api/todo/create', name: 'api_todo_create', methods: 'POST')]
+
     #param Request $request
     #return JsonResponse
    
@@ -62,5 +63,49 @@ class TodoController extends AbstractController
 
         }
     }
+
+    #[Route('api/todo/update/{id}', name: 'api_todo_update', methods: 'PUT')]
+    #param Todo $todo
+    #return JsonResponse
+   
+    public function update(Request $request, Todo $todo): JsonResponse
+    {
+       $content = json_decode($request->getContent());
+
+       $todo->setName($content->name);
+
+       try {
+            $this->entityManager->flush();
+            return $this->json([
+                'todo' => $todo->toArray(),
+            ]);
+       } catch (Exception $exceptin) {
+        //error 
+       }
+       return $this->json([
+            'message' => 'todo has been updated'
+       ]);
+    }
+
+    #[Route('api/todo/delete/{id}', name: 'api_todo_delete', methods: 'DELETE')]
+    #param Todo $todo
+    #return JsonResponse
+   
+    public function delete(Todo $todo): JsonResponse
+    {
+
+        try {
+            $this->entityManager->remove($todo);
+            $this->entityManager->flush();
+            return $this->json([
+                'todo' => $todo->toArray(),
+            ]);
+        } catch (Exception $exception) {
+            // error messeg 
+
+        }
+    }
+
+
 
 }
