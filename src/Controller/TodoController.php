@@ -54,7 +54,7 @@ class TodoController extends AbstractController
 
         try {
             $this->entityManager->persist($todo);
-            $this->entityManager->flush();
+            $this->entityManager->Flush();
             return $this->json([
                 'todo' => $todo->toArray(),
             ]);
@@ -75,7 +75,7 @@ class TodoController extends AbstractController
        $todo->setName($content->name);
 
        try {
-            $this->entityManager->flush();
+            $this->entityManager->Flush();
             return $this->json([
                 'todo' => $todo->toArray(),
             ]);
@@ -96,14 +96,17 @@ class TodoController extends AbstractController
 
         try {
             $this->entityManager->remove($todo);
-            $this->entityManager->flush();
+            $this->entityManager->Flush();
             return $this->json([
                 'todo' => $todo->toArray(),
             ]);
         } catch (Exception $exception) {
-            // error messeg 
+            // error  
 
         }
+        return $this->json([
+            'message' => 'todo has been deleted',
+        ]);
     }
 
 
